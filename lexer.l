@@ -1,10 +1,12 @@
+DIGIT [0-9]
+LETTER [a-zA-Z]
+
 %option noyywrap
 %{
 	#include <stdlib.h>
 	#include "parser.tab.h"
 %}
 
-VAR [a-z]
 
 %%
 
@@ -40,5 +42,6 @@ VAR [a-z]
 "{" { return '{'; }
 "}" { return '}'; }
 
-%%
+{LETTER}({LETTER}|{DIGIT})* { return(IDENTIFIER); }
 
+%%
