@@ -1,12 +1,13 @@
-DIGIT [0-9]
-LETTER [a-zA-Z]
-
 %option noyywrap
 %{
 	#include <stdlib.h>
 	#include "parser.tab.h"
 %}
 
+DIGIT [0-9]
+LETTER [a-zA-Z]
+ALPHANUMERIC [a-zA-Z0-9]
+WHITESPACE [\t\v\n\f]
 
 %%
 
@@ -42,6 +43,8 @@ LETTER [a-zA-Z]
 "{" { return '{'; }
 "}" { return '}'; }
 
-{LETTER}({LETTER}|{DIGIT})* { return(IDENTIFIER); }
+{LETTER}{ALPHANUMERIC}* { return(IDENTIFIER); }
+
+{WHITESPACE}+ { } /* Whitespaces are ignored */
 
 %%
