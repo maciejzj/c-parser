@@ -24,7 +24,18 @@ declaration
 	;
 
 variable_declaration
-	: type_specifier IDENTIFIER ';'
+	: type_qualifiers_list type_specifier IDENTIFIER ';'
+	;
+
+type_qualifier
+	: CONST
+	| VOLATILE
+	| RESTRICT
+	;
+
+type_qualifiers_list
+	: type_qualifier type_qualifiers_list
+	|
 	;
 
 type_specifier
