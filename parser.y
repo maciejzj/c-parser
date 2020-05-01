@@ -21,10 +21,30 @@ line
 
 declaration
 	: variable_declaration
+	| function_declaration
 	;
 
 variable_declaration
-	: type_qualifiers_list type_specifier ptr IDENTIFIER ';'
+	: type_declarator variable_identifier ';'
+	;
+
+type_declarator
+	: type_qualifiers_list type_specifier ptr 
+	;
+
+variable_identifier
+	: optional_identifier
+	| variable_identifiers_list
+	; 
+
+variable_identifiers_list
+	: IDENTIFIER
+	| IDENTIFIER ',' variable_identifiers_list
+	;
+	
+optional_identifier
+	: IDENTIFIER
+	|
 	;
 
 ptr
@@ -53,6 +73,16 @@ type_specifier
 	| DOUBLE
 	| SIGNED
 	| UNSIGNED
+	;
+
+function_declaration
+	: type_declarator IDENTIFIER '(' arg_list ')' ';'
+	;
+
+arg_list
+	: type_declarator optional_identifier
+	| type_declarator optional_identifier ',' arg_list
+	|
 	;
 
 %%
