@@ -25,23 +25,18 @@ declaration
 	;
 
 variable_declaration
-	: type_declarator variable_identifier ';'
+	: type_declarator variable_identifiers_list ';'
 	;
 
 type_declarator
-	: type_qualifiers_list type_specifier ptr 
+	: type_qualifiers_list type_specifier ptr
 	;
-
-variable_identifier
-	: optional_identifier
-	| variable_identifiers_list
-	; 
 
 variable_identifiers_list
-	: IDENTIFIER
-	| IDENTIFIER ',' variable_identifiers_list
+	: optional_identifier
+	| variable_identifiers_list ',' IDENTIFIER
 	;
-	
+
 optional_identifier
 	: IDENTIFIER
 	|
@@ -59,7 +54,7 @@ type_qualifier
 	;
 
 type_qualifiers_list
-	: type_qualifier type_qualifiers_list
+	: type_qualifiers_list type_qualifier
 	|
 	;
 
@@ -81,7 +76,7 @@ function_declaration
 
 arg_list
 	: type_declarator optional_identifier
-	| type_declarator optional_identifier ',' arg_list
+	| arg_list ',' type_declarator optional_identifier
 	|
 	;
 
