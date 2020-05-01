@@ -1,3 +1,6 @@
+# Target executable
+parser
+
 # System files
 .DS_Store
 
@@ -11,6 +14,7 @@
 *.yy.c
 *.tab.c
 *.tab.h
+*.output
 
 # Object files
 *.o
