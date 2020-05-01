@@ -24,7 +24,12 @@ declaration
 	;
 
 variable_declaration
-	: type_qualifiers_list type_specifier IDENTIFIER ';'
+	: type_qualifiers_list type_specifier ptr IDENTIFIER ';'
+	;
+
+ptr
+	: '*' type_qualifiers_list ptr
+	|
 	;
 
 type_qualifier

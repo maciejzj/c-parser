@@ -43,6 +43,8 @@ WHITESPACE [\t\v\n\f]
 "{" { return '{'; }
 "}" { return '}'; }
 
+"*" {return '*'; }
+
 {LETTER}{ALPHANUMERIC}* { return(IDENTIFIER); }
 
 {WHITESPACE}+ { } /* Whitespaces are ignored */
