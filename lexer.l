@@ -2,6 +2,10 @@
 %{
 	#include <stdlib.h>
 	#include "parser.tab.h"
+
+	extern void yyerror(const char *);
+
+	static void process_comment(void);
 %}
 
 DIGIT [0-9]
@@ -10,6 +14,9 @@ ALPHANUMERIC [a-zA-Z0-9]
 WHITESPACE [\t\v\n\f]
 
 %%
+
+"/*" { process_comment(); }
+"//".* { }
 
 "auto" { return(AUTO); }
 "char" { return(CHAR); }
@@ -52,3 +59,18 @@ WHITESPACE [\t\v\n\f]
 {WHITESPACE}+ { } /* Whitespaces are ignored */
 
 %%
+
+static void process_comment(void)
+{
+	int c;
+	do {
+		c = input();
+		if (c == '*') {
+			try_end_comment:
+			c = input();
+			if (c == '*') goto try_end_comment;
+			if (c == '/') return;
+		}
+	} while(c != 0);
+	yyerror("unterminated comment");
+}
