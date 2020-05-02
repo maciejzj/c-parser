@@ -86,9 +86,12 @@ function_declaration
 arg_list
 	: type_declarator optional_identifier
 	| arg_list ',' type_declarator optional_identifier
+	| type_declarator optional_identifier '[' ']'
+	| arg_list ',' type_declarator optional_identifier '[' ']'
+	| type_declarator optional_identifier '[' constant_uint ']'
+	| arg_list ',' type_declarator optional_identifier '[' constant_uint ']'
 	|
 	;
-
 %%
 
 void yyerror(const char *s)
