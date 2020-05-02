@@ -45,6 +45,8 @@ WHITESPACE [\t\v\n\f]
 
 "*" {return '*'; }
 
+{DIGIT}+ { yylval = atoi(yytext); return CONST_UINT; }
+
 {LETTER}{ALPHANUMERIC}* { return(IDENTIFIER); }
 
 {WHITESPACE}+ { } /* Whitespaces are ignored */

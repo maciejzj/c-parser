@@ -9,6 +9,7 @@
 %token TYPEDEF EXTERN STATIC AUTO REGISTER INLINE RESTRICT
 %token CHAR SHORT INT LONG SIGNED UNSIGNED FLOAT DOUBLE CONST VOLATILE VOID
 %token STRUCT UNION ENUM ELLIPSIS
+%token CONST_UINT
 
 %start line
 
@@ -34,7 +35,15 @@ type_declarator
 
 variable_identifiers_list
 	: optional_identifier
+	| IDENTIFIER '[' ']'
+	| IDENTIFIER '[' constant_uint ']'
 	| variable_identifiers_list ',' IDENTIFIER
+	| variable_identifiers_list ',' IDENTIFIER '[' ']'
+	| variable_identifiers_list ',' IDENTIFIER '[' constant_uint ']'
+	;
+
+constant_uint
+	: CONST_UINT
 	;
 
 optional_identifier
