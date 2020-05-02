@@ -80,7 +80,13 @@ type_specifier
 	;
 
 function_declaration
-	: type_declarator IDENTIFIER '(' arg_list ')' ';'
+	: type_declarator IDENTIFIER '(' args ')' ';'
+	;
+
+args
+	: arg_list ',' ELLIPSIS
+	| arg_list
+	|
 	;
 
 arg_list
@@ -90,8 +96,8 @@ arg_list
 	| arg_list ',' type_declarator optional_identifier '[' ']'
 	| type_declarator optional_identifier '[' constant_uint ']'
 	| arg_list ',' type_declarator optional_identifier '[' constant_uint ']'
-	|
 	;
+
 %%
 
 void yyerror(const char *s)
