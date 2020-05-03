@@ -17,12 +17,17 @@
 
 line
 	: line declaration
+	| line type_definition
 	|
 	;
 
 declaration
 	: variable_declaration
 	| function_declaration
+	;
+
+type_definition
+	: struct_union_definition
 	;
 
 variable_declaration
@@ -41,6 +46,26 @@ variable_identifiers_list
 	| variable_identifiers_list ',' IDENTIFIER '[' ']'
 	| variable_identifiers_list ',' IDENTIFIER '[' constant_uint ']'
 	;
+
+struct_union_definition
+	: STRUCT optional_identifier compound_type
+	| UNION optional_identifier compound_type
+	;
+
+compound_type
+	: '{' members '}' ';'
+	;
+
+members
+	: members_list
+	|
+	;
+
+members_list
+	: variable_declaration
+	| members_list variable_declaration
+	;
+
 
 constant_uint
 	: CONST_UINT
