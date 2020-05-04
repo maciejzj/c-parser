@@ -97,9 +97,9 @@ const_uint_expr
 	: CONST_INT { $$ = $<uitype>1; };
 	| const_uint_expr '+' const_uint_expr { $$ = $1 + $3; }
 	| const_uint_expr '-' const_uint_expr {
-		if($<itype>1 - $<itype>3 < 0){ 
-			yyerror("Array declaed with negative number as size."); 
-		} 
+		if($<itype>1 - $<itype>3 < 0){
+			yyerror("Array declaed with negative number as size.");
+		}
 		$$ = $1 - $3;
 	}
 	| const_uint_expr '*' const_uint_expr { $$ = $1 * $3; }
