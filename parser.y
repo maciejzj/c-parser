@@ -9,7 +9,10 @@
 %token TYPEDEF EXTERN STATIC AUTO REGISTER INLINE RESTRICT
 %token CHAR SHORT INT LONG SIGNED UNSIGNED FLOAT DOUBLE CONST VOLATILE VOID
 %token STRUCT UNION ENUM ELLIPSIS
-%token CONST_UINT
+%token NUM CONST_UINT
+
+%left '+' '-'
+%left '*' '/'
 
 %start line
 
@@ -32,6 +35,9 @@ type_definition
 
 variable_declaration
 	: type_declarator variable_identifiers_list ';'
+	| type_declarator IDENTIFIER '=' const_expr ';'
+	| type_declarator variable_identifiers_list ','
+		IDENTIFIER '=' const_expr ';'
 	;
 
 type_declarator
@@ -121,6 +127,23 @@ arg_list
 	| arg_list ',' type_declarator optional_identifier '[' ']'
 	| type_declarator optional_identifier '[' constant_uint ']'
 	| arg_list ',' type_declarator optional_identifier '[' constant_uint ']'
+	;
+
+const_expr
+	: CONST_UINT
+	| '+' const_expr{ $$ = -$2; }
+	| const_expr '+' const_expr { $$ = $1 + $3; }
+	| const_expr '-' const_expr { $$ = $1 - $3; }
+	| const_expr '*' const_expr { $$ = $1 * $3 }
+	| const_expr '/' const_expr {
+		if ($2 == 0) {
+			yyerror("Zero division");
+			$$ = 1;
+		} else {
+			$$ = $1 / $3;
+		}
+	}
+	| '(' const_expr ')' { $$ = $2; }
 	;
 
 %%

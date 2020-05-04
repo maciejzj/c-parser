@@ -50,6 +50,8 @@ WHITESPACE [\t\v\n\f]
 "{" { return '{'; }
 "}" { return '}'; }
 
+"=" { return '='; }
+
 "*" {return '*'; }
 
 {DIGIT}+ { yylval = atoi(yytext); return CONST_UINT; }
