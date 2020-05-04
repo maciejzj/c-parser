@@ -15,6 +15,7 @@ WHITESPACE [\t\v\n\f]
 
 %%
 
+
 "/*" { process_comment(); }
 "//".* { }
 
@@ -51,10 +52,13 @@ WHITESPACE [\t\v\n\f]
 "}" { return '}'; }
 
 "=" { return '='; }
-
+"+" { return '+'; }
+"-" { return '-'; }
 "*" {return '*'; }
+"/" { return '/'; }
 
-{DIGIT}+ { yylval = atoi(yytext); return CONST_UINT; }
+{DIGIT}+ { yylval.itype = atoi(yytext); return CONST_INT; }
+{DIGIT}*"."{DIGIT}+ { yylval.dtype = atoi(yytext); return CONST_FLOAT; }
 
 {LETTER}{ALPHANUMERIC}* { return(IDENTIFIER); }
 
