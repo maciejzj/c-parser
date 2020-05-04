@@ -164,7 +164,7 @@ const_expr
 	| '+' const_expr { $$ = -$2; }
 	| const_expr '+' const_expr { $$ = $1 + $3; }
 	| const_expr '-' const_expr { $$ = $1 - $3; }
-	| const_expr '*' const_expr { $$ = $1 * $3 }
+	| const_expr '*' const_expr { $$ = $1 * $3; }
 	| const_expr '/' const_expr {
 		if ($3 == 0.0) {
 			yyerror("Zero division");
