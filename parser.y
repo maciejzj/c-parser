@@ -58,6 +58,7 @@ variable_declaration
 	| type_declarator IDENTIFIER '=' const_expr ';'
 	| type_declarator variable_identifiers_list ','
 		IDENTIFIER '=' const_expr ';'
+	| type_declarator '(' ptr IDENTIFIER ')' '(' args ')' ';'
 	;
 
 type_declarator
