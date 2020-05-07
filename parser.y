@@ -40,7 +40,7 @@ declaration
 	;
 
 enum_declaration
-	: ENUM '{' enum_identifier_list '}' ';'
+	: ENUM optional_identifier '{' enum_identifier_list '}' ';'
 	;
 
 enum_identifier_list
