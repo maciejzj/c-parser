@@ -15,7 +15,6 @@ WHITESPACE [\t\v\n\f]
 
 %%
 
-
 "/*" { process_comment(); }
 "//".* { }
 

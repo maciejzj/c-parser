@@ -48,6 +48,7 @@ enum_identifier_list
 	| IDENTIFIER '=' const_expr
 	| enum_identifier_list ',' IDENTIFIER
 	| enum_identifier_list ',' IDENTIFIER '=' const_expr
+	;
 
 type_definition
 	: struct_union_definition
@@ -92,7 +93,6 @@ members_list
 	: variable_declaration
 	| members_list variable_declaration
 	;
-
 
 const_uint_expr
 	: CONST_INT { $$ = $<uitype>1; };
