@@ -99,7 +99,7 @@ const_uint_expr
 	| const_uint_expr '+' const_uint_expr { $$ = $1 + $3; }
 	| const_uint_expr '-' const_uint_expr {
 		if($<itype>1 - $<itype>3 < 0){
-			yyerror("Array declaed with negative number as size.");
+			yyerror("Array declared with negative number as size.");
 		}
 		$$ = $1 - $3;
 	}
@@ -168,7 +168,7 @@ const_expr
 	| const_expr '*' const_expr { $$ = $1 * $3; }
 	| const_expr '/' const_expr {
 		if ($3 == 0.0) {
-			yyerror("Zero division");
+			yyerror("Zero division.");
 			$$ = 1;
 		} else {
 			$$ = $1 / $3;
