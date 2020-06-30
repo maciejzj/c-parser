@@ -57,7 +57,7 @@ WHITESPACE [\t\v\n\f]
 "/" { return '/'; }
 
 {DIGIT}+ { yylval.itype = atoi(yytext); return CONST_INT; }
-{DIGIT}*"."{DIGIT}+ { yylval.dtype = atoi(yytext); return CONST_FLOAT; }
+{DIGIT}*"."{DIGIT}+ { yylval.dtype = atof(yytext); return CONST_FLOAT; }
 
 {LETTER}{ALPHANUMERIC}* { return(IDENTIFIER); }
 
