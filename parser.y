@@ -162,7 +162,7 @@ arg_list
 const_expr
 	: CONST_INT {}
 	| CONST_FLOAT {}
-	| '+' const_expr { $$ = -$2; }
+	| '-' const_expr { $$ = -$2; }
 	| const_expr '+' const_expr { $$ = $1 + $3; }
 	| const_expr '-' const_expr { $$ = $1 - $3; }
 	| const_expr '*' const_expr { $$ = $1 * $3; }
